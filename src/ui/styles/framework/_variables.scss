@@ -1,0 +1,53 @@
+@import 'colors';
+@import '_font';
+
+
+// ================================================
+// Font
+// ================================================
+$base-font-size         : 100% !default; // typically 16px in most browsers
+$fontDefault            : rem-calc(12px);
+$fontMini               : rem-calc(10px);
+$fontBig                : rem-calc(14px);
+$fontLarge              : rem-calc(12px);
+
+$f-xxs					: rem-calc(10px);
+$f-xs					: rem-calc(11px);
+$f-sm					: rem-calc(12px);
+$f						: rem-calc(13px);
+$f-md					: rem-calc(14px);
+$f-lg					: rem-calc(16px);
+$f-xl					: rem-calc(18px);
+$f-xxl					: rem-calc(20px);
+$f-xxxl					: rem-calc(22px);
+
+
+
+// ================================================
+// Z-index
+// ================================================
+
+// Z-index levels
+$z-index-level-03       : -3 !default;
+$z-index-level-02       : -2 !default;
+$z-index-level-01       : -1 !default;
+$z-index-level-0        : 0 !default;
+$z-index-level-1        : 20 !default;
+$z-index-level-2        : 30 !default;
+$z-index-level-3        : 40 !default;
+$z-index-level-4        : 50 !default;
+$z-index-level-5        : 60 !default;
+$z-index-level-6        : 70 !default;
+
+// Z-index usage
+$z-index-select-dropdown	: $z-index-level-6 !default;
+$z-index-modal				: $z-index-level-4 !default;
+$z-index-tooltip        	: $z-index-level-6 !default;
+
+
+// ================================================
+// border-radius
+// ================================================
+
+$defaultBorderRadius			: 15px;
+$smallBorderRadius				: 4px;

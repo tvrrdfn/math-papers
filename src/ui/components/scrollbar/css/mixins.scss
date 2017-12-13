@@ -1,0 +1,141 @@
+@mixin scrollbar-rail-default($theme) {
+    display: none;
+    position: absolute;
+    transition: background-color .2s linear, opacity .2s linear;
+}
+
+@mixin scrollbar-rail-hover($theme) {
+    opacity: map_get($theme, rail-hover-opacity);
+    background-color: map_get($theme, rail-hover-bg);
+}
+
+@mixin scrollbar-default($theme) {
+    position: absolute;
+    transition: background-color .2s linear, height .2s linear, width .2s ease-in-out, border-radius .2s ease-in-out;
+    border-radius: map_get($theme, border-radius);
+    background-color: map_get($theme, bar-container-hover-bg);
+    opacity: map_get($theme, rail-default-opacity);
+}
+
+@mixin scrollbar-hover($theme) {
+    background-color: map_get($theme, bar-hover-bg);
+}
+
+@mixin in-scrolling($theme) {
+    &.ps-in-scrolling {
+        &.ps-x > .ps-scrollbar-x-rail {
+            @include scrollbar-rail-hover($theme);
+
+            > .ps-scrollbar-x {
+                height: map_get($theme, scrollbar-x-hover-height);
+                @include scrollbar-hover($theme);
+            }
+        }
+
+        &.ps-y > .ps-scrollbar-y-rail {
+            @include scrollbar-rail-hover($theme);
+
+            > .ps-scrollbar-y {
+                width: map_get($theme, scrollbar-y-hover-width);
+                @include scrollbar-hover($theme);
+            }
+        }
+    }
+}
+
+
+// Layout and theme mixin
+@mixin ps-container($theme) {
+    overflow: hidden !important;
+    -ms-touch-action: auto;
+    touch-action: auto;
+    -ms-overflow-style: none;
+    @include in-scrolling($theme);
+
+    // Edge
+    @supports (-ms-overflow-style: none) {
+        overflow: auto !important;
+    }
+
+    // IE10+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        overflow: auto !important;
+    }
+
+    &.ps-active-x > .ps-scrollbar-x-rail,
+    &.ps-active-y > .ps-scrollbar-y-rail {
+        display: block;
+        background-color: map_get($theme, bar-bg);
+    }
+
+    > .ps-scrollbar-x-rail {
+        bottom: map_get($theme, scrollbar-x-rail-bottom);
+        height: map_get($theme, scrollbar-x-rail-height);
+        @include scrollbar-rail-default($theme);
+
+        > .ps-scrollbar-x {
+            bottom: map_get($theme, scrollbar-x-bottom);
+            height: map_get($theme, scrollbar-x-height);
+            @include scrollbar-default($theme);
+
+            &:hover,
+            &:active {
+                opacity: map_get($theme, rail-container-hover-opacity);
+            }
+        }
+        &:hover,
+        &:active {
+            > .ps-scrollbar-x {
+                height: map_get($theme, scrollbar-x-hover-height);
+            }
+        }
+    }
+
+    > .ps-scrollbar-y-rail {
+        right: map_get($theme, scrollbar-y-rail-right);
+        width: map_get($theme, scrollbar-y-rail-width);
+         @include scrollbar-rail-default($theme);
+
+        > .ps-scrollbar-y {
+            right: map_get($theme, scrollbar-y-right);
+            width: map_get($theme, scrollbar-y-width);
+            @include scrollbar-default($theme);
+
+            &:hover,
+            &:active {
+                opacity: map_get($theme, rail-container-hover-opacity);
+            }
+        }
+
+        &:hover,
+        &:active {
+            > .ps-scrollbar-y {
+                width: map_get($theme, scrollbar-y-hover-width);
+            }
+        }
+    }
+
+    &.ps-theme-hide:hover {
+        // @include in-scrolling($theme);
+
+        > .ps-scrollbar-x-rail > .ps-scrollbar-x ,
+        > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+            opacity: map_get($theme, rail-container-hover-opacity);
+        }
+
+        // > .ps-scrollbar-x-rail:hover {
+        //     @include scrollbar-rail-hover($theme);
+
+        //     > .ps-scrollbar-x {
+        //         @include scrollbar-hover($theme);
+        //     }
+        // }
+        // > .ps-scrollbar-y-rail:hover {
+        //     @include scrollbar-rail-hover($theme);
+
+        //     > .ps-scrollbar-y {
+        //         @include scrollbar-hover($theme);
+        //     }
+        // }
+    }
+}

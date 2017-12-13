@@ -1,0 +1,228 @@
+[
+    {
+        "id": 1,
+        "name": "User",
+        "code": "",
+        "extra": null,
+        "child": [
+            {
+                "id": "ga:users",
+                "uuid": null,
+                "fieldId": "1",
+                "name": "Users",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:users",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:newUsers",
+                "uuid": null,
+                "fieldId": "2",
+                "name": "New Users",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:newUsers",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:sessionsPerUser",
+                "uuid": null,
+                "fieldId": "166",
+                "name": "Number of Sessions per User",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:sessionsPerUser",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:sessionCount",
+                "uuid": null,
+                "fieldId": "2",
+                "name": "Count of Sessions",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 1,
+                    "code": "ga:sessionCount",
+                    "type": "dimension"
+                }
+            },
+            {
+                "id": "ga:daysSinceLastSession",
+                "uuid": null,
+                "fieldId": "3",
+                "name": "Days Since Last Session",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 1,
+                    "code": "ga:daysSinceLastSession",
+                    "type": "dimension"
+                }
+            },
+            {
+                "id": "ga:percentNewSessions",
+                "uuid": null,
+                "fieldId": "3",
+                "name": "% New Sessions",
+                "dataType": "PERCENT",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:percentNewSessions",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:userType",
+                "uuid": null,
+                "fieldId": "1",
+                "name": "User Type",
+                "dataType": "STRING",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 1,
+                    "code": "ga:userType",
+                    "type": "dimension"
+                }
+            },
+            {
+                "id": "ga:userDefinedValue",
+                "uuid": null,
+                "fieldId": "4",
+                "name": "User Defined Value",
+                "dataType": "STRING",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 1,
+                    "code": "ga:userDefinedValue",
+                    "type": "dimension"
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Session",
+        "code": "",
+        "extra": null,
+        "child": [
+            {
+                "id": "ga:sessions",
+                "uuid": null,
+                "fieldId": "4",
+                "name": "Sessions",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:sessions",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:bounces",
+                "uuid": null,
+                "fieldId": "5",
+                "name": "Bounces",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:bounces",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:hits",
+                "uuid": null,
+                "fieldId": "142",
+                "name": "Hits",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:hits",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:sessionDurationBucket",
+                "uuid": null,
+                "fieldId": "5",
+                "name": "Session Duration",
+                "dataType": "NUMBER",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 1,
+                    "code": "ga:sessionDurationBucket",
+                    "type": "dimension"
+                }
+            },
+            {
+                "id": "ga:bounceRate",
+                "uuid": null,
+                "fieldId": "6",
+                "name": "Bounce Rate",
+                "dataType": "PERCENT",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:bounceRate",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:sessionDuration",
+                "uuid": null,
+                "fieldId": "7",
+                "name": "Session Duration",
+                "dataType": "DURATION",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:sessionDuration",
+                    "type": "metrics"
+                }
+            },
+            {
+                "id": "ga:avgSessionDuration",
+                "uuid": null,
+                "fieldId": "8",
+                "name": "Avg. Session Duration",
+                "dataType": "DURATION",
+                "calculateType": null,
+                "dataFormat": null,
+                "extra": {
+                    "allowFilter": 0,
+                    "code": "ga:avgSessionDuration",
+                    "type": "metrics"
+                }
+            }
+        ]
+    }
+]

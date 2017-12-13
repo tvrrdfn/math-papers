@@ -1,0 +1,282 @@
+<template>
+    <div class="pt-ui-tree" ref="container">
+
+    </div>
+</template>
+
+<script>
+    import searchlist from './search-list';
+
+    export default {
+        name: 'ptTree',
+        props: {
+            list: {
+                type: Array,
+                required: true
+            },
+            value: {
+                type: [Number, String],
+                required: true
+            }
+        },
+        mounted() {
+            this.searchList = new searchlist(
+                this.$refs.container, {
+                    selectedId: this.value,
+                    tips: {
+                        empty: '未能找到任何档案'
+                    },
+                    callback: function(data) {
+                        alert(JSON.stringify(data));
+                    }
+                }
+            );
+            this.searchList.render(this.list);
+        },
+        data() {
+            return {
+                searchList: null
+            };
+        },
+        destroyed() {
+            this.searchList.destroy();
+        }
+    }
+</script>
+
+<style lang="scss">
+    @import '../../styles/imports';
+    $btnBorderRadius: 15px;
+    .search-list {
+        box-sizing: border-box; 
+        background-color: $dd-nightrider;
+    }
+    .light-pt-tree .search-list{
+        background-color: $dd-mineshaft;
+        .hd{
+            input{
+                border: 1px solid $dd-tundora;
+            }
+        }
+    }
+    .search-list .hd {
+        position: relative;
+        color: $dd-white;
+        &.has-value{
+            input{
+                background-color: $dd-larioja;
+                border: 1px solid $dd-larioja;
+                text-indent: 2em;
+                box-shadow: inset 0 0 0 0 rgba(0,0,0,0.5);
+                &:focus{
+                    background-color: transparent;
+                }
+                &~span{
+                    left: 5px;
+                    &:after{
+                        opacity: 0;
+                    }
+                }
+            }
+            a{
+                display: inline-block;
+                background-color: $dd-white;
+                &:after,
+                &:before{
+                    background-color: $dd-larioja;
+                }
+            }
+        }
+        input {
+            border: 1px solid $dd-tundora;
+            border-radius: 4px;
+            box-shadow: inset 0 0 0 0 rgba(0,0,0,0.5);
+            outline: none;
+            background-color: transparent;
+            width: 100%;
+            height: 26px;
+            padding: 0;
+            color: inherit; 
+            transition: background-color ease .2s;
+            font-size: $font-default;
+            &:focus{
+                text-indent: 2em;
+                border: 1px solid $dd-larioja;
+                & ~span{
+                    left: 5px;
+                    &:after{
+                        opacity: 0;
+                    }
+                }
+                &~a{
+                    background-color: $dd-nobel;
+                    &:after,
+                    &:before{
+                        background-color: $dd-nightrider;
+                    }
+                }
+            }
+        }
+        span{
+            width: 9px;
+            height: 9px;
+            border: 2px solid $dd-dimgray;
+            border-radius: 50%;
+            margin-top: 8px;
+            margin-right: 14px;
+            position: absolute;
+            box-sizing: content-box; 
+            left: 65px;
+            top: -3px;
+            transition: left ease .2s;
+            cursor: text;
+            &:after{
+                content: attr(data-name);
+                position: absolute;
+                left: 20px;
+                top: -2px;
+                opacity: 1;
+                color: $dd-dimgray;
+                transition: opacity ease .2s;
+            }
+            &:before {
+                content: '';
+                width: 3px;
+                height: 7px;
+                background-color: $dd-dimgray;
+                top: 7px;
+                left: 9px;
+                position: absolute;
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+                transform: rotate(-45deg); 
+            }
+        }
+        a{
+            display: none;
+            background-color: $dd-nobel;
+            border-radius: 10px;
+            width: 14px;
+            height: 14px;
+            position: absolute;
+            right: 4px;
+            top: 6px;
+            transition: background-color ease .2s;
+            &:after{
+                content: '';
+                width: 2px;
+                height: 10px;
+                position:absolute;
+                top: 2px;
+                left: 6px;
+                background-color: $dd-nightrider;
+                transform: rotate(45deg);
+                transition: background-color ease .2s;
+            }
+            &:before{
+                content: '';
+                width: 2px;
+                height: 10px;
+                position:absolute;
+                top: 2px;
+                left: 6px;
+                background-color: $dd-nightrider;
+                transform: rotate(-45deg);
+                transition: background-color ease .2s;
+            }
+        }
+    }
+    
+    .search-list .bd {
+        min-height: 160px;
+        margin-top: 1px;
+        padding: 10px;
+        font-size: 14px; 
+        ul,li{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5; 
+        }
+        ul li{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            box-sizing: border-box;
+            a{
+                cursor: pointer;
+                color: $dd-nobel;
+                text-decoration: none; 
+                svg{
+                    display: none;
+                }
+            }
+        }
+    }
+    
+    
+    .search-list .bd ul li[data-last-li='true'] {
+        vertical-align: middle;
+        padding: 3px 0;
+        font-size: $font-hidden;
+    }
+    .search-list .bd ul li[data-last-li='true'] a {
+        color: $dd-nightrider;
+        display: inline-block;
+        height: 26px;
+        line-height: 26px;
+        background-color: $dd-dimgray;
+        border-radius: $btnBorderRadius;
+        padding: 0 10px 0 0;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-size: $font-default;
+        svg{
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+            margin:0 6px;
+            fill: rgba(0,0,0,.16);
+        }
+        i{
+            color: $dd-larioja;
+        }
+    }
+    .search-list .bd ul li.cascade{
+        padding-bottom: 8px;
+        & > a {
+            padding-left: 10px;
+            position: relative; 
+            span{
+                padding-left:9px;
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                left: 2px;
+                top: 4px;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-color: transparent transparent transparent $dd-nobel;
+                transition: all .2s ease; 
+                border-width: 6.5px 0 6.5px 7px;
+                border-top-left-radius: 2px;
+                border-bottom-left-radius: 2px;
+            }
+        }
+    }
+    .search-list .bd ul li.cascade > ul {
+        display: none; 
+    }
+    .search-list .bd ul li.cascade.on > a::before {
+        transform: rotate(90deg); 
+    }
+    .search-list .bd ul li.cascade.on > ul {
+        display: block; 
+    }
+
+</style>

@@ -1,21 +1,25 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Papers from '@/components/Papers'
+
+import Main from '@/components/Main';
 import HelloWorld from '@/components/HelloWorld'
 import Papers from '@/components/Papers'
+import Ui from '@/ui/demo/uiDemo'
 
 Vue.use(Router)
 
 export default new Router({
-    routes: [
-    {
+    routes: [{
+        path: '/',
+        name: 'Main',
+        component: Main
+    }, {
         path: '/papers',
         name: 'Papers',
         component: Papers
-    },
-    {
-        path: '/',
-        name: 'HelloWorld',
-        component: HelloWorld
-    },]
+    }, {
+    	path: '/ui',
+    	name: 'Ui',
+    	component: Ui
+    }]
 })
