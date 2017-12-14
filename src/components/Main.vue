@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions } from 'vuex'; 
+    import { mapState, mapActions } from 'vuex'; 
 	import mainAside from '@/components/main-aside/main-aside';
 	import mainBody from '@/components/main-body/main-body';
 

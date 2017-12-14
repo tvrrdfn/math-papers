@@ -5,13 +5,26 @@
             dd
                 pt-select(
                     :options="questionTyps"
-                    :value="1"
+                    v-model="currCode"
                     @change="onTypeChange"
                 )
         dl
             dt 题目名称:
             dd
-                pt-input(theme="dark")
+                pt-input(
+                    theme="dark"
+                    v-model="currName"
+                    @change="onNameChange"
+                )
+        dl
+            dt 本题分值:
+            dd
+                pt-input-number(
+                    theme="dark"
+                    :min="1"
+                    :value="currScore"
+                    @change="onScoreChange"
+                )
 
 
 
@@ -23,16 +36,40 @@
 	export default {
 		name: "questionBox",
 
+        props: {
+            item: Object
+        },
+
 		data() {
 			return {
-                currOption: QuestionTyps.getFirstCode(),
+                currCode: this.item.code,
+                currName: this.item.name,
+                currScore: this.item.score,
 				questionTyps: QuestionTyps.types
 			}
 		},
 
         methods: {
-            onTypeChange(val) {
-                console.log(val)
+            onTypeChange(code) {
+                this.notice();
+            },
+
+            onNameChange(name) {
+                this.notice();
+            },
+
+            onScoreChange(val) {
+                this.currScore = val;
+                this.notice();
+            },
+
+            notice() {
+                let currItem = Object.assign(this.item, {
+                    code: this.currCode,
+                    name: this.currName,
+                    score: this.currScore
+                })
+                this.$emit('itemChange', currItem);
             }
         }
 	}

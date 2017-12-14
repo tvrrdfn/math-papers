@@ -12,17 +12,26 @@
                     pt-svg(use-id="icon-plus")
             pt-scrollbar(ref="scrollbar")
                 .main-aside__body-box-wrap
-                    dl.main-aside__body-box(v-for="(item, index) in items")
+                    dl.main-aside__body-box(
+                        v-for="(item, index) in items"
+                        key="item.key"
+                    )
                         dt 第 {{index + 1}} 题
-                            button.delete(@click="del(index)")
+                            button.delete(@click="del(item.key)")
                                 pt-svg(use-id="icon-delete")
-                        dd(:is="item")
+                        dd
+                            question-box(
+                                :item="item"
+                                @itemChange="onItemChange"
+                            )
         .main-aside__footer
 </template>
 
 <script>
     import { mapState, mapActions } from 'vuex';
 	import questionBox from './question-box';
+    import uuidUtils from '@/utils/uuid.utils';
+    import QuestionTyps from '@/components/configs/question-type.configs';
 
 	export default {
 		name: "mainAside",
@@ -40,22 +49,50 @@
         computed: mapState('main', ['mainAsideIsPackup']),
 
 		methods: {
+            ...mapActions('main', ['setQuestions']),
+
+            getDefaultBox() {
+                return {
+                    code: QuestionTyps.getFirstCode(),
+                    name: '连加',
+                    score: 20,
+                    key: uuidUtils.uuid()
+                }
+            },
+
 			add() {
-                this.items.push('question-box');
+                this.items.push(this.getDefaultBox());
                 this.scrollbarUpdate();
 		    },
 
-		    del(index) {
-		    	this.items.splice(index, 1);
-                this.scrollbarUpdate();
+		    del(itemKey) {
+                let index = this.items.findIndex(item => item.key === itemKey);
+                if(index !== -1){
+                    this.items.splice(index, 1);
+                    this.scrollbarUpdate();
+                }
 		    },
 
             scrollbarUpdate() {
                 this.$nextTick(() => {
                     this.$refs.scrollbar.update();
                 })
+            },
+
+            onItemChange(item) {
+                console.log(item);
             }
 		},
+
+        watch: {
+            items: {
+                handler: function(newVal) {
+                    console.log(newVal)
+                    this.setQuestions(this.items);
+                },
+                deep: true
+            }
+        },
 
 		components: {
 			questionBox
