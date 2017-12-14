@@ -1,5 +1,9 @@
 <template>
-	<div class="scrollbar__holder ps-container" ref="content">
+	<div 
+		class="scrollbar__holder ps-container"
+		:class="['ps-theme-'+theme]"
+		ref="content"
+	>
 	  <!-- <div class="scrollbar__content" ref="content"> -->
 	  	<slot></slot>
 	  <!-- </div> -->
@@ -7,8 +11,8 @@
 </template>
 
 
-<script type="text/javascript">
-import Ps from 'perfect-scrollbar';
+<script>
+import PerfectScrollbar from 'perfect-scrollbar';
 
 export default {
 	name: "ptScrollbar",
@@ -72,6 +76,7 @@ export default {
 
 	data(){
 		return {
+			Ps: null,
 			options: [
 				'wheelSpeed',
 				'wheelPropagation',
@@ -165,16 +170,16 @@ export default {
 		},
 
 		initialize(){
-			Ps.initialize(this.$el, this.getOptions());
+			this.Ps = new PerfectScrollbar(this.$el, this.getOptions());
 		},
 
 		destroy() {
 			this.clearAutoUpdate();
-			Ps.destroy(this.$el);
+			this.Ps.destroy(this.$el);
 		},
 
 		update() {
-			Ps.update(this.$el);
+			this.Ps.update(this.$el);
 			this.setAutoUpdate();
 		},
 
@@ -200,7 +205,7 @@ export default {
 
 		getOptions(){
 			let currentOptions = {};
-			currentOptions['handlers'] = this.disabled ? ['selection'] : ['click-rail', 'drag-scrollbar', 'keyboard', 'wheel', 'touch'];
+			// currentOptions['handlers'] = this.disabled ? ['selection'] : ['click-rail', 'drag-thumb', 'keyboard', 'wheel', 'touch'];
 			this.options.forEach(option => {
 				currentOptions[option] = this[option];
 			})
