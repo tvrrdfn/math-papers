@@ -1,8 +1,11 @@
 export default {
 	types: [{
-		name: "顺序计算",
-		key: 'sort',
-		code: '01'
+		type: "数字分解",
+		code: 'breakDown',
+        score: 20,
+		class: 'qusetions__breakDown',
+        name: '填一填',
+        showSettings: true
 	},{
 		name: "顺序计算",
 		key: 'sort',
@@ -37,7 +40,7 @@ export default {
 		code: '09'
 	}],
 
-	getFirstCode() {
-		return this.types[0].code;
+	getDefaultType() {
+		return this.types[0];
 	}
 }

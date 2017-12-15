@@ -4,6 +4,7 @@
             dt 选择题型:
             dd
                 pt-select(
+                    :keys="{label: 'type', value: 'code'}"
                     :options="questionTyps"
                     v-model="currCode"
                     @change="onTypeChange"

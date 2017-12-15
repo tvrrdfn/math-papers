@@ -24,8 +24,6 @@
     footer
         button(@click="go") 生成试题
 
-    h3 分解运算试题
-
     .page(ref="page")
 </template>
 
@@ -67,7 +65,10 @@ export default {
             this.questions = QuestionsServices.mixedQuestions(questionsLen, this.isMixed);
             console.log(this.questions)
 
-            this.$refs.page.innerHTML = QuestionsServices.getHtml(this.questions);
+            // this.$refs.page.innerHTML = QuestionsServices.getHtml(this.questions);
+            let HTML = QuestionsServices.getHtml(this.questions);
+
+            this.$emit('set', HTML);
         }
     }
 }

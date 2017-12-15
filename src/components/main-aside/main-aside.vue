@@ -14,10 +14,10 @@
                 .main-aside__body-box-wrap
                     dl.main-aside__body-box(
                         v-for="(item, index) in items"
-                        key="item.key"
+                        key="item.code"
                     )
                         dt 第 {{index + 1}} 题
-                            button.delete(@click="del(item.key)")
+                            button.delete(@click="del(item.code)")
                                 pt-svg(use-id="icon-delete")
                         dd
                             question-box(
@@ -51,22 +51,13 @@
 		methods: {
             ...mapActions('main', ['setQuestions']),
 
-            getDefaultBox() {
-                return {
-                    code: QuestionTyps.getFirstCode(),
-                    name: '连加',
-                    score: 20,
-                    key: uuidUtils.uuid()
-                }
-            },
-
 			add() {
-                this.items.push(this.getDefaultBox());
+                this.items.push(QuestionTyps.getDefaultType());
                 this.scrollbarUpdate();
 		    },
 
-		    del(itemKey) {
-                let index = this.items.findIndex(item => item.key === itemKey);
+		    del(itemCode) {
+                let index = this.items.findIndex(item => item.code === itemCode);
                 if(index !== -1){
                     this.items.splice(index, 1);
                     this.scrollbarUpdate();

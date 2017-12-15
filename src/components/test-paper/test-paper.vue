@@ -10,15 +10,22 @@
                 button(@click="toggleSetting(item)")
                     pt-svg(use-id="icon-setting")
 
-            .test-paper__box-settings(v-if="item.showSettings") settings
-
-            .test-paper__box-content {{item.code}}
+            .test-paper__box-settings(v-if="item.showSettings")
+                all-questions(
+                    :is="item.code"
+                    @set="onSettings"
+                )
+            .test-paper__box-content(
+                v-html="questionsHTML"
+                :class="[item.class]"
+            )
 </template>
 
 <script>
     import { mapState, mapActions } from 'vuex';
     import numberUtils from '@/utils/number.utils';
     import QuestionTyps from '@/components/configs/question-type.configs';
+    import allQuestions from '@/components/questions';
 
     export default {
         name: "testPaper",
@@ -29,7 +36,8 @@
 
         data() {
             return {
-                isShowSetting: true
+                isShowSetting: true,
+                questionsHTML: null
             }
         },
 
@@ -42,13 +50,20 @@
 
             toggleSetting(item) {
                 item.showSettings = !item.showSettings;
+            },
+
+            onSettings(html) {
+                this.questionsHTML = html;
             }
-        }
+        },
+
+        components: allQuestions
     }
 </script>
 
 <style lang="sass">
-    @import "../../styles/imports";
+    @import "../../styles/imports"
+    @import "../../styles/questions.sass"
     
     .test-paper
         &__box
@@ -89,5 +104,6 @@
                 border-radius: 4px
                 background-color: $dd-mercury
 
+            &-content
 
 </style>
