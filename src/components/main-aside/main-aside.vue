@@ -49,7 +49,10 @@
         computed: mapState('main', ['mainAsideIsPackup']),
 
 		methods: {
-            ...mapActions('main', ['setQuestions']),
+            ...mapActions('main', [
+                'setQuestions',
+                'updateQuestions'
+            ]),
 
 			add() {
                 this.items.push(QuestionTyps.getDefaultType());
@@ -72,6 +75,7 @@
 
             onItemChange(item) {
                 console.log(item);
+                this.updateQuestions(item)
             }
 		},
 

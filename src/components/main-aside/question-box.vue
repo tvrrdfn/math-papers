@@ -1,13 +1,12 @@
 <template lang="pug">
-    dl.question-box
+    dl.question-box(v-if="currItem")
         dl
             dt 选择题型:
             dd
                 pt-select(
                     :keys="{label: 'type', value: 'code'}"
                     :options="questionTyps"
-                    v-model="currCode"
-                    v-if="currCode"
+                    :value="currItem.code"
                     @change="onTypeChange"
                 )
         dl
@@ -15,8 +14,7 @@
             dd
                 pt-input(
                     theme="dark"
-                    v-model="currName"
-                    v-if="currName"
+                    :value="currItem.name"
                     @change="onNameChange"
                 )
         dl
@@ -25,13 +23,9 @@
                 pt-input-number(
                     theme="dark"
                     :min="1"
-                    :value="currScore"
-                    v-if="currScore"
+                    :value="currItem.score"
                     @change="onScoreChange"
                 )
-
-
-
 </template>
 
 <script>
@@ -46,16 +40,10 @@
 
 		data() {
 			return {
-                currCode: null,
-                currName: null,
-                currScore: null,
+                currItem: this.item,
 				questionTyps: QuestionTyps.types
 			}
 		},
-
-        mounted() {
-            this.setCurrValue(this.item);
-        },
 
         methods: {
             setCurrValue(item) {
@@ -65,27 +53,23 @@
             },
 
             onTypeChange(item) {
-                this.setCurrValue(item);
-                // this.notice();
+                this.currItem = item;
+                this.notice();
             },
 
             onNameChange(name) {
-                // this.notice();
+                this.currItem.name = name;
+                this.notice();
             },
 
-            onScoreChange(val) {
-                this.currScore = val;
-                // this.notice();
+            onScoreChange(score) {
+                this.currItem.score = score;
+                this.notice();
             },
 
-            // notice() {
-            //     let currItem = Object.assign(this.item, {
-            //         code: this.currCode,
-            //         name: this.currName,
-            //         score: this.currScore
-            //     })
-            //     this.$emit('itemChange', currItem);
-            // }
+            notice() {
+                this.$emit('itemChange', this.currItem);
+            }
         }
 	}
 </script>

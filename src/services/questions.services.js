@@ -1,6 +1,33 @@
 import CommonUtils from '@/utils/common.utils';
 
 export default {
+    /**
+     * 按设置信息生成题目
+     * @param {Object} setting
+     * @return {Array}
+     */
+    getQuestions(setting) {
+        let questions = [],
+            operator = setting.operator,
+            len = setting.len,
+            max = setting.max,
+            min = setting.min,
+            divisible = setting.divisible, // 是否整除
+            isMixed = setting.isMixed; //是否混排
+
+        // 最大试题库
+        let questionsMax = this.getQuestionsMax(operator, setting); 
+
+        // 提取相应的题目数量
+        let questionsLen = this.getQuestionsLen(questionsMax, len);
+
+        // 混排处理，并添加操作符熟悉
+        questions = this.mixedQuestions(questionsLen, isMixed);
+
+        return questions;
+    },
+
+
 	/**
 	 * 获取当前操作符下的最大试题库
 	 * @param {String} operator
@@ -164,13 +191,22 @@ export default {
 				spanY = '<span class="y ' + (y === '' ? 'box': '') + '">' + y + '</span>',
 				spanZ = '<span class="z ' + (z === '' ? 'box': '') + '">' + z + '</span>';
 
-			html += `<div class="item">
-					<div class="id">${index + 1}.</div>
-					${spanZ}
-					<span class="branch"></span>
-					${spanX}
-					${spanY}
-				</div>`;
+			// html += `<div class="item">
+			// 		<div class="id">${index + 1}.</div>
+			// 		${spanZ}
+			// 		<span class="branch"></span>
+			// 		${spanX}
+			// 		${spanY}
+			// 	</div>`;
+
+            html += `<div class="item">
+                        <div class="id">${index + 1}.</div>
+                        ${spanX}
+                        <span class="operator">${l.oName}</span>
+                        ${spanY}
+                        <span class="operator">=</span>
+                        ${spanZ}
+                    </div>`;
 		})
 
 		return '<div class="list">' + html + '</div>';

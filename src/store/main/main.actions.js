@@ -14,5 +14,13 @@ export const actions = {
      */
     setQuestions({commit}, questions) {
         commit(types.SET_QUESTIONS, questions);
+    },
+
+    /**
+     * 更新所选题型
+     * @param {Object} question
+     */
+    updateQuestions({commit}, question) {
+        commit(types.UPDATE_QUESTIONS, question)
     }
 }

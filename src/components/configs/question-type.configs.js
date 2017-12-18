@@ -1,4 +1,5 @@
 import cloneUtils from '@/utils/clone.utils';
+import uuidUtils from '@/utils/uuid.utils';
 
 export default {
 	types: [{
@@ -9,7 +10,7 @@ export default {
         name: '填一填',
         showSettings: true
 	},{
-		type: "填空",
+		type: "四则运算填空题",
 		code: 'completion',
         score: 20,
 		class: 'qusetions__completion',
@@ -18,7 +19,7 @@ export default {
 	}],
 
 	getDefaultType() {
-		return cloneUtils.deep(this.types[0]);
+		return cloneUtils.deep(Object.assign({uuid: uuidUtils.uuid()}, this.types[0]));
 	},
 
 	getTypeForCode(code) {
