@@ -7,6 +7,7 @@
                     :keys="{label: 'type', value: 'code'}"
                     :options="questionTyps"
                     v-model="currCode"
+                    v-if="currCode"
                     @change="onTypeChange"
                 )
         dl
@@ -15,6 +16,7 @@
                 pt-input(
                     theme="dark"
                     v-model="currName"
+                    v-if="currName"
                     @change="onNameChange"
                 )
         dl
@@ -24,6 +26,7 @@
                     theme="dark"
                     :min="1"
                     :value="currScore"
+                    v-if="currScore"
                     @change="onScoreChange"
                 )
 
@@ -43,35 +46,46 @@
 
 		data() {
 			return {
-                currCode: this.item.code,
-                currName: this.item.name,
-                currScore: this.item.score,
+                currCode: null,
+                currName: null,
+                currScore: null,
 				questionTyps: QuestionTyps.types
 			}
 		},
 
+        mounted() {
+            this.setCurrValue(this.item);
+        },
+
         methods: {
-            onTypeChange(code) {
-                this.notice();
+            setCurrValue(item) {
+                this.currCode = item.code;
+                this.currName = item.name;
+                this.currScore = item.score;
+            },
+
+            onTypeChange(item) {
+                this.setCurrValue(item);
+                // this.notice();
             },
 
             onNameChange(name) {
-                this.notice();
+                // this.notice();
             },
 
             onScoreChange(val) {
                 this.currScore = val;
-                this.notice();
+                // this.notice();
             },
 
-            notice() {
-                let currItem = Object.assign(this.item, {
-                    code: this.currCode,
-                    name: this.currName,
-                    score: this.currScore
-                })
-                this.$emit('itemChange', currItem);
-            }
+            // notice() {
+            //     let currItem = Object.assign(this.item, {
+            //         code: this.currCode,
+            //         name: this.currName,
+            //         score: this.currScore
+            //     })
+            //     this.$emit('itemChange', currItem);
+            // }
         }
 	}
 </script>

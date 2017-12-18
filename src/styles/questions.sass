@@ -12,12 +12,12 @@
             margin-bottom: 20px
 
         .item
-            width: 90px
-            height: 100px
-            padding: 4px
+            @include size(142px, 120px)
+            color: $dd-charcoal
+            padding: 10px
             position: relative
-            border: 1px dashed #ddd
-            margin: 2px 4px
+            border: 1px dashed $dd-alto
+            margin: 0 4px 10px
 
             .id
                 color: #999
@@ -28,20 +28,16 @@
                 font-size: 12px
 
             span
-                width: 30px
-                height: 30px
-                display: flex
-                align-items: center
-                text-align: center
-                justify-content: center
+                @include size(30px)
+                @extend %flex-center
+                font-size: $f-lg
 
                 &.branch
-                    width: 30px
-                    height: 30px
+                    @include size(50px)
                     border-left: 1px solid #ccc
                     border-top: 1px solid #ccc
                     transform: rotate(45deg)
-                    margin: 10px auto 0
+                    margin: 15px auto 0
 
                 &.x,
                 &.y

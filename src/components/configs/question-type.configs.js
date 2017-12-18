@@ -1,3 +1,5 @@
+import cloneUtils from '@/utils/clone.utils';
+
 export default {
 	types: [{
 		type: "数字分解",
@@ -7,40 +9,19 @@ export default {
         name: '填一填',
         showSettings: true
 	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '02'
-	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '03'
-	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '04'
-	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '05'
-	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '06'
-	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '07'
-	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '08'
-	},{
-		name: "顺序计算",
-		key: 'sort',
-		code: '09'
+		type: "填空",
+		code: 'completion',
+        score: 20,
+		class: 'qusetions__completion',
+        name: '我是计算小能手',
+        showSettings: true
 	}],
 
 	getDefaultType() {
-		return this.types[0];
+		return cloneUtils.deep(this.types[0]);
+	},
+
+	getTypeForCode(code) {
+		return this.types.find(type => type.code === code);
 	}
 }

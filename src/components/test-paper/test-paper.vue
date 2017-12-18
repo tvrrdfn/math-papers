@@ -66,6 +66,11 @@
     @import "../../styles/questions.sass"
     
     .test-paper
+        width: $page-a4-width
+        border: 1px solid $dd-mercury
+        margin: 0 auto;
+        background-color: $dd-white
+
         &__box
             margin: 20px
 
@@ -102,8 +107,8 @@
                 margin: 10px 0
                 padding: 10px
                 border-radius: 4px
-                background-color: $dd-mercury
+                background-color: $dd-wildsand
 
             &-content
-
+                margin-top: 30px
 </style>

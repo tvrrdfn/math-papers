@@ -28,11 +28,10 @@
 </template>
 
 <script>
-import CommonUtils from '@/utils/common.utils';
 import QuestionsServices from '@/services/questions.services';
 
 export default {
-	name: "breakDown",
+    name: "completion",
 
     data() {
         return {
@@ -103,65 +102,4 @@ export default {
                 margin: 0
                 display: flex
                 align-items: center
-
-    &__footer
-        margin-top: 10px
-        text-align: right
-
-    .list
-        display: flex;
-        flex-wrap: wrap;
-
-        &:nth-child(odd):not(:last-child),
-        &:not(:last-child)
-            padding-bottom: 20px;
-            border-bottom: 1px dashed #000;
-            margin-bottom: 20px;
-
-        .item
-            width: 90px;
-            height: 100px;
-            padding: 4px;
-            position: relative;
-            border: 1px dashed #ddd;
-            margin: 2px 4px;
-
-            .id
-                color: #999;
-                line-height: 1em;
-                position: absolute;
-                top: 5px;
-                left: 5px;
-                font-size: 12px;
-
-            span
-                width: 30px;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                text-align: center;
-                justify-content: center;
-
-                &.branch
-                    width: 30px;
-                    height: 30px;
-                    border-left: 1px solid #ccc;
-                    border-top: 1px solid #ccc;
-                    transform: rotate(45deg);
-                    margin: 10px auto 0;
-
-                &.x,
-                &.y
-                    position: absolute;
-                    bottom: 4px;
-                    left: 10px;
-                &.y
-                    left: auto;
-                    right: 10px;
-
-                &.z
-                    margin: 0 auto;
-
-                &.box
-                    border: 1px solid #ccc;
 </style>

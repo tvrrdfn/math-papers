@@ -78,7 +78,6 @@
         watch: {
             items: {
                 handler: function(newVal) {
-                    console.log(newVal)
                     this.setQuestions(this.items);
                 },
                 deep: true
@@ -97,12 +96,12 @@
     .main-aside
         display: flex;
         flex-direction: column;
-        flex: 0 0 $mian-aside-width
+        flex: 0 0 $main-aside-width
         background-color: $dd-nightrider
         transition: flex .2s linear
 
         &.packup
-            flex: 0 1 $mian-aside-packup-width;
+            flex: 0 1 $main-aside-packup-width;
 
             .main-aside__header
                 justify-content: center
