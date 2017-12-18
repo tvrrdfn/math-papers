@@ -204,7 +204,7 @@ export default {
                         ${spanX}
                         <span class="operator">${l.oName}</span>
                         ${spanY}
-                        <span class="operator">=</span>
+                        <span class="equal">=</span>
                         ${spanZ}
                     </div>`;
 		})

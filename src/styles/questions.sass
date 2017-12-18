@@ -33,12 +33,14 @@
                 @extend %flex-center
                 font-size: $f-lg
 
-                &.branch
+                &.operator
                     @include size(50px)
                     border-left: 1px solid #ccc
                     border-top: 1px solid #ccc
                     transform: rotate(45deg)
-                    margin: 15px auto 0
+                    margin: 45px auto 0
+                    text-indent: -9999px;
+                    overflow: hidden;
 
                 &.x,
                 &.y
@@ -50,7 +52,13 @@
                     right: 10px
 
                 &.z
-                    margin: 0 auto
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    top: 10px;
+
+                &.equal
+                    display: none
 
                 &.box
                     border: 1px solid #ccc
