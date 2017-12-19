@@ -8,7 +8,7 @@ export const mutations = {
         state.questions = questions;
     },
     [types.UPDATE_QUESTIONS](state, item) {
-        let index = state.questions.findIndex(item => item.uuid === item.uuid);
+        let index = state.questions.findIndex(question => question.uuid === item.uuid);
         if(index !== -1){
             state.questions[index] = item;
         }

@@ -1,30 +1,30 @@
 <template lang="pug">
-.break-down
-    .break-down__header 
-        span 分解设置（X + Y = Z）
-        pt-button(@click="go") 生成试题
-    .break-down__body
-        dl.break-down__box
-            dt
-                span 题目数量：
-            dd
-                pt-input(v-model="len")
-        dl.break-down__box
-            dt
-                span (Z)最大值：
-            dd
-                pt-input(v-model="zMax")
-        dl.break-down__box
-            dt
-                span (Z)最小值：
-            dd
-                pt-input(v-model="zMin")
-        dl.break-down__box
-            dt
-            dd
-                pt-checkbox(v-model="isMixed") 是否混排
-
-    .page(ref="page")
+    .break-down.questions-settings
+        .questions-settings__header
+            span 分解设置（X + Y = Z）
+            pt-button(@click="go") 生成试题
+        .questions-settings__content
+            .questions-settings__content-box
+                dl
+                    dt
+                        span 题目数量：
+                    dd
+                        pt-input(v-model="len")
+                dl
+                    dt
+                        span (Z)最大值：
+                    dd
+                        pt-input(v-model="zMax")
+                dl
+                    dt
+                        span (Z)最小值：
+                    dd
+                        pt-input(v-model="zMin")
+                dl.break-down__box
+                    dt
+                        span 是否混排
+                    dd
+                        pt-checkbox(v-model="isMixed") 应用
 </template>
 
 <script>
@@ -48,120 +48,35 @@ export default {
 
     methods: {
         go() {
-            let setting = {
+            let settings = [{
+                operator: this.operator,
                 len: +this.len,
                 zMax: +this.zMax,
                 zMin: +this.zMin,
                 isMixed: this.isMixed
-            }
+            }]
 
-            // 最大试题库
-            this.questionsMax = QuestionsServices.getQuestionsMax(this.operator, setting); 
+            // 根据设置信息生成试题
+            this.questions = [];
+            settings.forEach(setting => {
+                let currQuestions = QuestionsServices.getQuestions(setting);
+                setting['questions'] = currQuestions;
+                this.questions.push(...currQuestions);
+            });
 
-            // 提取相应的题目数量
-            let questionsLen = QuestionsServices.getQuestionsLen(this.questionsMax, this.len);
-
-            // 混排处理，并添加操作符熟悉
-            this.questions = QuestionsServices.mixedQuestions(questionsLen, this.isMixed);
-            console.log(this.questions)
-
-            // this.$refs.page.innerHTML = QuestionsServices.getHtml(this.questions);
             let HTML = QuestionsServices.getHtml(this.questions);
 
-            this.$emit('set', HTML);
+            this.$emit('set', HTML, this.$el.getAttribute('uuid'));
         }
     }
 }
 </script>
 
 <style lang="sass">
-@import '../../styles/imports';
+    @import '../../styles/imports';
 
-.break-down
-    color: $dd-charcoal
-
-    &__header
-        height: 50px;
-        border-bottom: 1px solid $dd-gainsboro
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-    &__body
-        display: flex
-        flex-direction: column;
-
-        dl
+    .break-down
+        .questions-settings__content-box
+            border: none
             display: flex
-            line-height: 30px
-            margin-top: 10px
-
-            dt
-                width: 110px
-                text-align: right
-            dd
-                margin: 0
-                display: flex
-                align-items: center
-
-    &__footer
-        margin-top: 10px
-        text-align: right
-
-    .list
-        display: flex;
-        flex-wrap: wrap;
-
-        &:nth-child(odd):not(:last-child),
-        &:not(:last-child)
-            padding-bottom: 20px;
-            border-bottom: 1px dashed #000;
-            margin-bottom: 20px;
-
-        .item
-            width: 90px;
-            height: 100px;
-            padding: 4px;
-            position: relative;
-            border: 1px dashed #ddd;
-            margin: 2px 4px;
-
-            .id
-                color: #999;
-                line-height: 1em;
-                position: absolute;
-                top: 5px;
-                left: 5px;
-                font-size: 12px;
-
-            span
-                width: 30px;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                text-align: center;
-                justify-content: center;
-
-                &.branch
-                    width: 30px;
-                    height: 30px;
-                    border-left: 1px solid #ccc;
-                    border-top: 1px solid #ccc;
-                    transform: rotate(45deg);
-                    margin: 10px auto 0;
-
-                &.x,
-                &.y
-                    position: absolute;
-                    bottom: 4px;
-                    left: 10px;
-                &.y
-                    left: auto;
-                    right: 10px;
-
-                &.z
-                    margin: 0 auto;
-
-                &.box
-                    border: 1px solid #ccc;
 </style>

@@ -10,11 +10,18 @@ export default {
         name: '填一填',
         showSettings: true
 	},{
-		type: "四则运算填空题",
-		code: 'completion',
+        type: "四则运算填空题",
+        code: 'completion',
         score: 20,
-		class: 'qusetions__completion',
+        class: 'qusetions__completion',
         name: '我是计算小能手',
+        showSettings: true
+    },{
+		type: "数字大小比较",
+		code: 'compare',
+        score: 10,
+		class: 'qusetions__compare',
+        name: '比一比',
         showSettings: true
 	}],
 

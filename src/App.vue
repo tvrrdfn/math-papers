@@ -19,6 +19,10 @@
     position: relative
 
 @media print
+    html,
+    body
+        height: auto
+        
     .main-aside, 
     .main-body__header,
     .main-body__body-header,

@@ -30,6 +30,7 @@
 
 <script>
 	import QuestionTyps from '@/components/configs/question-type.configs';
+    import uuidUtils from '@/utils/uuid.utils';
 
 	export default {
 		name: "questionBox",
@@ -53,7 +54,7 @@
             },
 
             onTypeChange(item) {
-                this.currItem = item;
+                this.currItem = Object.assign(this.currItem, item);
                 this.notice();
             },
 

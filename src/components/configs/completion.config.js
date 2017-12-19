@@ -1,3 +1,5 @@
+import CloneUtils from '@/utils/clone.utils';
+
 export default {
     add: {
         code: '+',
@@ -142,7 +144,7 @@ export default {
             return prev;
         }, []);
 
-        return configs;
+        return CloneUtils.deep(configs);
     },
 
     /**

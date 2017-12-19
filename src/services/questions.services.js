@@ -27,7 +27,6 @@ export default {
         return questions;
     },
 
-
 	/**
 	 * 获取当前操作符下的最大试题库
 	 * @param {String} operator
@@ -185,24 +184,17 @@ export default {
 
 			let x = l.x === null ? '' : l.x,
 				y = l.y === null ? '' : l.y,
-				z = l.z === null ? '' : l.z;
+				z = l.z === null || l.z === undefined ? '' : l.z,
+                o = l.oName || '';
 
 			let spanX = '<span class="x ' + (x === '' ? 'box': '') + '">' + x + '</span>',
 				spanY = '<span class="y ' + (y === '' ? 'box': '') + '">' + y + '</span>',
 				spanZ = '<span class="z ' + (z === '' ? 'box': '') + '">' + z + '</span>';
 
-			// html += `<div class="item">
-			// 		<div class="id">${index + 1}.</div>
-			// 		${spanZ}
-			// 		<span class="branch"></span>
-			// 		${spanX}
-			// 		${spanY}
-			// 	</div>`;
-
             html += `<div class="item">
                         <div class="id">${index + 1}.</div>
                         ${spanX}
-                        <span class="operator">${l.oName}</span>
+                        <span class="operator">${o}</span>
                         ${spanY}
                         <span class="equal">=</span>
                         ${spanZ}

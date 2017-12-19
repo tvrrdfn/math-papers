@@ -67,7 +67,7 @@ export default {
             console.log(this.questions);
 
             let HTML = QuestionsServices.getHtml(this.questions);
-            this.$emit('set', HTML);
+            this.$emit('set', HTML, this.$el.getAttribute('uuid'));
         }
     }
 }

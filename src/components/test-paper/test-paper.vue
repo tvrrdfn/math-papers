@@ -13,10 +13,11 @@
             .test-paper__box-settings(v-if="item.showSettings")
                 all-questions(
                     :is="item.code"
+                    :uuid="item.uuid"
                     @set="onSettings"
                 )
             .test-paper__box-content(
-                v-html="questionsHTML"
+                :ref="item.uuid"
                 :class="[item.class]"
             )
 </template>
@@ -52,8 +53,9 @@
                 item.showSettings = !item.showSettings;
             },
 
-            onSettings(html) {
-                this.questionsHTML = html;
+            onSettings(html, uuid) {
+                this.$refs[uuid][0].innerHTML = html;
+                // this.questionsHTML = html;
             }
         },
 
