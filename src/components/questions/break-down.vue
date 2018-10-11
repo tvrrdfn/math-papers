@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             operator: '+',
-            len: 20,
+            len: 15,
             zMax: 20,
             zMin: 10,
             isMixed: true,

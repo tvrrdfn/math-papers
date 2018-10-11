@@ -41,7 +41,7 @@
 
         data() {
             return {
-                len: 10,
+                len: 20,
                 xMax: 100,
                 xMin: 10,
                 yMax: 100,

@@ -4,17 +4,17 @@ export default {
     add: {
         code: '+',
         name: '+',
-        value: 'false',
+        value: 'true',
         title: "加法设置（X + Y = Z）",
         renderOptions: [{
             code: 'len',
             name: '题目数量：',
-            value: 20,
+            value: 25,
             type: 'number'
         }, {
             code: 'zMax',
             name: '(Z)最大值：',
-            value: 20,
+            value: 100,
             type: 'number'
         }, {
             code: 'zMin',
@@ -24,24 +24,24 @@ export default {
         }, {
             code: 'isMixed',
             name: '是否混排：',
-            value: false,
+            value: true,
             type: 'boolean'
         }]
     },
     sub: {
         code: '-',
         name: '-',
-        value: 'false',
+        value: 'true',
         title: "减法设置（X - Y = Z）",
         renderOptions: [{
             code: 'len',
             name: '题目数量：',
-            value: 20,
+            value: 25,
             type: 'number'
         }, {
             code: 'xMax',
             name: '(X)最大值：',
-            value: 20,
+            value: 100,
             type: 'number'
         }, {
             code: 'xMin',
@@ -51,7 +51,7 @@ export default {
         }, {
             code: 'isMixed',
             name: '是否混排：',
-            value: false,
+            value: true,
             type: 'boolean'
         }]
     },
