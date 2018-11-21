@@ -5,22 +5,27 @@
             pt-checkbox(v-model="mixing") 题型是否相互混合
             pt-button(@click="go") 生成试题
         .questions-settings__content
-            .questions-settings__content-box(v-for="item in configs")
+            .questions-settings__content-box(
+                v-for="(item, $itemIndex) in configs"
+                :key="$itemIndex"
+                )
                 header {{item.title}}
-                    pt-checkbox(
-                        v-model="item.value"
-                    ) 应用
-                template(v-for="box in item.renderOptions")
+                    pt-checkbox(v-model="item.value") 应用
+                template(v-for="(box, $boxIndex) in item.renderOptions")
                     dl(v-if="box.type === 'number'")
                         dt
                             span {{box.name}}
                         dd
-                            pt-input(
-                                v-model="box.value"
-                            )
+                            pt-input-number(
+                                :value="box.value"
+                                @change="onChange($event, $boxIndex, $itemIndex)"
+                                )
                     dl(v-if="box.type === 'boolean'")
                         dd
-                            pt-checkbox(v-model="box.value") {{box.name}}
+                            pt-checkbox(
+                                :value="box.value"
+                                @change="onChange($event, $boxIndex, $itemIndex)"
+                                ) {{box.name}}
 </template>
 
 <script>
@@ -46,6 +51,10 @@ export default {
     methods: {
         init() {
             this.configs = CompletionConfigs.getConfigs();
+        },
+
+        onChange(value, boxIndex, itemIndex) {
+            this.$set(this.configs[itemIndex].renderOptions[boxIndex], 'value', +value)  
         },
 
         go() {
