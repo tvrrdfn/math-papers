@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Main from '@/components/Main';
-import HelloWorld from '@/components/HelloWorld'
 import Papers from '@/components/Papers'
 import Ui from '@/ui/demo/uiDemo'
 

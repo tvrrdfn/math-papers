@@ -12,17 +12,6 @@
 
     export default {
         name: "main",
-
-        data() {
-            return {
-                
-            }
-        },
-
-        methods: {
-            
-        },
-
         components: {
         	mainAside,
         	mainBody
