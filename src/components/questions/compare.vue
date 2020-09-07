@@ -71,8 +71,8 @@
 
             getQuestionsMax() {
                 let questionsMax = [],
-                    xValues = CommonUtils.initArray(this.xMax - this.xMin + 1, this.xMin),
-                    yValues = CommonUtils.initArray(this.yMax - this.yMin + 1, this.yMin);
+                    xValues = CommonUtils.initArray(+this.xMax - +this.xMin + 1, +this.xMin),
+                    yValues = CommonUtils.initArray(+this.yMax - +this.yMin + 1, +this.yMin);
 
                 xValues.forEach(x => {
                     yValues.forEach(y => {
